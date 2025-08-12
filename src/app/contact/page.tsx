@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card";
-
+import { ClientOnly } from "@/components/ClientOnly";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -48,6 +48,7 @@ export default function ContactPage() {
 
   return (
     <div className="container max-w-2xl py-12">
+      <ClientOnly>
         <Card className="w-full max-w-lg mx-auto border-primary/20 shadow-md">
             <CardHeader className="text-center">
                 <CardTitle className="text-3xl font-bold text-primary font-headline">Contact Us</CardTitle>
@@ -86,6 +87,7 @@ export default function ContactPage() {
                 </Form>
             </CardContent>
       </Card>
+      </ClientOnly>
     </div>
   );
 }
