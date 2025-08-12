@@ -43,24 +43,6 @@ export default function AboutPage() {
               Our platform is the solution we always wished we had. It combines comprehensive, nationwide property data with a powerful suite of analytics and communication tools. We are dedicated to building intuitive, user-friendly technology that saves you time, reduces your risk, and gives you a critical edge in a competitive market.
             </p>
           </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold mb-2 text-primary text-center">Meet the Team</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-              {/* Team Member 1 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-muted mb-2"></div>
-                <h4 className="font-bold text-primary">Anthony Gaona</h4>
-                <p className="text-sm text-muted-foreground">Co-Founder & CEO</p>
-              </div>
-              {/* Team Member 2 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-muted mb-2"></div>
-                <h4 className="font-bold text-primary">Thomas Schustereit</h4>
-                <p className="text-sm text-muted-foreground">Co-Founder & CTO</p>
-              </div>
-            </div>
-          </div>
         </CardContent>
       </Card>
     </div>
