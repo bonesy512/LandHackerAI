@@ -1,5 +1,28 @@
+import { type Metadata } from 'next';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
+// SEO and Open Graph Metadata
+export const metadata: Metadata = {
+  title: "About Us | LandHacker.ai",
+  description: "Learn about the mission and team behind LandHacker.ai, the all-in-one platform empowering real estate innovators.",
+  openGraph: {
+    title: "About Us | LandHacker.ai",
+    description: "Learn about the mission and team behind LandHacker.ai, the all-in-one platform empowering real estate innovators.",
+    url: "https://landhacker.ai/about",
+    siteName: "LandHacker.ai",
+    images: [
+      {
+        url: "/og-image-about.png", // Placeholder for a specific OG image
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
+
+// Page Component
 export default function AboutPage() {
   return (
     <div className="container mx-auto max-w-4xl py-12 px-4">
@@ -19,6 +42,24 @@ export default function AboutPage() {
             <p className="text-muted-foreground text-center">
               Our platform is the solution we always wished we had. It combines comprehensive, nationwide property data with a powerful suite of analytics and communication tools. We are dedicated to building intuitive, user-friendly technology that saves you time, reduces your risk, and gives you a critical edge in a competitive market.
             </p>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-semibold mb-2 text-primary text-center">Meet the Team</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+              {/* Team Member 1 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full bg-muted mb-2"></div>
+                <h4 className="font-bold text-primary">Anthony Gaona</h4>
+                <p className="text-sm text-muted-foreground">Co-Founder & CEO</p>
+              </div>
+              {/* Team Member 2 */}
+              <div className="flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full bg-muted mb-2"></div>
+                <h4 className="font-bold text-primary">Thomas Schustereit</h4>
+                <p className="text-sm text-muted-foreground">Co-Founder & CTO</p>
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
