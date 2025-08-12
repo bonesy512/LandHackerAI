@@ -1,4 +1,28 @@
+// src/app/contact/page.tsx
+
 'use client';
+
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contact Us | LandHacker.ai",
+  description: "Get in touch with the LandHacker.ai team. We're here to answer your questions and receive your feedback.",
+  openGraph: {
+    title: "Contact Us | LandHacker.ai",
+    description: "Get in touch with the LandHacker.ai team.",
+    url: "https://landhacker.ai/contact",
+    siteName: "LandHacker.ai",
+    images: [
+      {
+        url: "/og-image-contact.png", // A specific OG image for the contact page
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,7 +38,6 @@ import { ClientOnly } from "@/components/ClientOnly";
 
 export default function ContactPage() {
   const { toast } = useToast();
-  
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: { name: "", email: "", message: "" },
@@ -86,7 +109,7 @@ export default function ContactPage() {
                     </form>
                 </Form>
             </CardContent>
-      </Card>
+        </Card>
       </ClientOnly>
     </div>
   );
