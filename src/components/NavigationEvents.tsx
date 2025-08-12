@@ -1,12 +1,13 @@
+// src/components/NavigationEvents.tsx
 'use client'
 
-import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { pageview } from '@/lib/gtag'
+import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { pageview } from '@/lib/gtag';
 
 export function NavigationEvents() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (pathname) {
@@ -14,9 +15,10 @@ export function NavigationEvents() {
       if(searchParams) {
         url.search = searchParams.toString();
       }
-      pageview(url)
+      // Every time the URL changes, send a `pageview` event.
+      pageview(url);
     }
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]); // Re-run this effect when the path changes.
 
-  return null
+  return null;
 }
