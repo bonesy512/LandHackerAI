@@ -55,9 +55,9 @@ export default function Home() {
           <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl mb-6">
             LandHacker.ai is the all-in-one proptech platform for real estate investors, agents, and wholesalers. Get access to comprehensive property data, generate instant comps, and connect with motivated sellers—all in one place.
           </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg">Download on the App Store</Button>
-            <Button size="lg" variant="outline">Get it on Google Play</Button>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Button size="lg" className="w-full sm:w-auto">Download on the App Store</Button>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto">Get it on Google Play</Button>
           </div>
         </div>
       </section>
