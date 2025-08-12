@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card";
 
 
 export default function ContactPage() {
@@ -49,9 +48,10 @@ export default function ContactPage() {
 
   return (
     <div className="container max-w-2xl py-12">
-        <Card className="bg-card border-primary/20">
+        <Card className="w-full max-w-lg mx-auto border-primary/20 shadow-md">
             <CardHeader className="text-center">
-                <CardTitle className="text-4xl font-headline text-primary">Contact Us</CardTitle>
+                <CardTitle className="text-3xl font-bold text-primary font-headline">Contact Us</CardTitle>
+                <CardDescription>We'll get back to you as soon as possible.</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
