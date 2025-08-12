@@ -1,5 +1,27 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Marketing & Communications Policy | LandHacker.ai",
+  description: "Understand how LandHacker.ai communicates with you. This policy covers consent for marketing emails, push notifications, and how to manage your preferences.",
+  openGraph: {
+    title: "Marketing & Communications Policy | LandHacker.ai",
+    description: "Understand how LandHacker.ai communicates with you and how to manage your preferences.",
+    url: "https://landhacker.ai/marketing",
+    siteName: "LandHacker.ai",
+    images: [
+      {
+        url: "/og-image-legal.png", // A generic branded OG image
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "article",
+  },
+};
+
 
 export default function MarketingPolicyPage() {
   const marketingPolicyText = `
@@ -66,15 +88,15 @@ Phone: 210-288-4266
 `;
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto max-w-4xl py-12 px-4">
       <Card className="bg-card border-primary/20">
         <CardHeader>
-          <CardTitle className="text-4xl font-headline text-primary">Marketing Policy</CardTitle>
+          <CardTitle className="text-3xl font-bold text-primary font-headline">Marketing & Communications Policy</CardTitle>
           <CardDescription className="text-muted-foreground">Last updated: August 7, 2025</CardDescription>
         </CardHeader>
         <CardContent>
             <ScrollArea className="h-[60vh] rounded-md border border-primary/20 p-4">
-                 <div className="whitespace-pre-wrap text-sm text-muted-foreground">
+                 <div className="whitespace-pre-wrap text-sm text-muted-foreground prose dark:prose-invert max-w-none">
                     {marketingPolicyText}
                  </div>
             </ScrollArea>
