@@ -78,13 +78,13 @@ Phone: [Insert Corporate Phone Number]
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <Card>
+      <Card className="bg-card border-primary/20">
         <CardHeader>
-          <CardTitle className="text-4xl font-headline">Privacy Policy</CardTitle>
-          <CardDescription>Last updated: August 7, 2025</CardDescription>
+          <CardTitle className="text-4xl font-headline text-primary">Privacy Policy</CardTitle>
+          <CardDescription className="text-muted-foreground">Last updated: August 7, 2025</CardDescription>
         </CardHeader>
         <CardContent>
-            <ScrollArea className="h-[60vh] rounded-md border p-4">
+            <ScrollArea className="h-[60vh] rounded-md border border-primary/20 p-4">
                  <div className="whitespace-pre-wrap text-sm text-muted-foreground">
                     {privacyPolicyText}
                  </div>

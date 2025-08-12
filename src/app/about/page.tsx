@@ -4,10 +4,10 @@ import Image from 'next/image';
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <Card>
+      <Card className="bg-card border-primary/20">
         <CardHeader className="text-center">
-          <CardTitle className="text-4xl font-headline">About LandHacker.ai</CardTitle>
-          <CardDescription className="text-lg">Empowering Real Estate Professionals Through Technology</CardDescription>
+          <CardTitle className="text-4xl font-headline text-primary">About LandHacker.ai</CardTitle>
+          <CardDescription className="text-lg text-muted-foreground">Empowering Real Estate Professionals Through Technology</CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
           <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -17,7 +17,7 @@ export default function AboutPage() {
                 alt="Team working on LandHacker.ai" 
                 width={600} 
                 height={400} 
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md border-2 border-primary/30"
                 data-ai-hint="team collaboration"
               />
             </div>

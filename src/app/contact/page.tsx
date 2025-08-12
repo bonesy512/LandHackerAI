@@ -5,10 +5,10 @@ import { Mail } from "lucide-react";
 export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-2xl mx-auto bg-card border-primary/20">
         <CardHeader className="text-center">
-          <CardTitle className="text-4xl font-headline">Contact Us</CardTitle>
-          <CardDescription className="text-lg">
+          <CardTitle className="text-4xl font-headline text-primary">Contact Us</CardTitle>
+          <CardDescription className="text-lg text-muted-foreground">
             We&apos;d love to hear from you.
           </CardDescription>
         </CardHeader>
