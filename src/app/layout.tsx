@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
+import { Inter } from "next/font/google";
 import './globals.css';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 export const metadata: Metadata = {
-  title: 'LandHacker.ai - Unlock Off-Market Real Estate Deals',
+  title: {
+    default: "LandHacker.ai",
+    template: "%s | LandHacker.ai",
+  },
   description: 'The ultimate proptech tool for finding off-market properties, generating comps, and managing deals.',
 };
 
@@ -27,7 +33,8 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-body antialiased flex flex-col'
+          'min-h-screen bg-background font-body antialiased flex flex-col',
+           inter.variable
         )}
       >
         <Navbar />

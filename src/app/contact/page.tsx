@@ -1,87 +1,91 @@
-// In /app/contact/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { contactFormSchema } from "@/lib/schemas";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card";
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  
+  const form = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: { name: "", email: "", message: "" },
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = {
-      name: (e.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
-      email: (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value,
-      message: (e.currentTarget.elements.namedItem('message') as HTMLTextAreaElement).value,
-    };
-
+  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(values),
       });
 
-      if (response.ok) {
-        toast({
-            title: "Message Sent!",
-            description: "Thank you for your message. We'll be in touch soon.",
-        });
-        (e.target as HTMLFormElement).reset();
-      } else {
-        throw new Error('Failed to send message.');
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
       }
+      
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your message. We'll be in touch soon.",
+      });
+      form.reset();
     } catch (error) {
        toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request. Please try again.",
-      })
-    } finally {
-      setIsSubmitting(false);
+        description: "Failed to send message. Please try again.",
+      });
     }
-  };
+  }
 
   return (
-    <div className="container mx-auto max-w-2xl py-12 px-4">
-      <form onSubmit={handleSubmit}>
+    <div className="container max-w-2xl py-12">
         <Card className="bg-card border-primary/20">
-          <CardHeader className="text-center">
-            <CardTitle className="text-4xl font-headline text-primary">Contact Us</CardTitle>
-             <CardDescription className="text-lg text-muted-foreground">
-                We&apos;d love to hear from you.
-             </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" name="message" required className="min-h-[120px]"/>
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col items-center">
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </Button>
-          </CardFooter>
-        </Card>
-      </form>
+            <CardHeader className="text-center">
+                <CardTitle className="text-4xl font-headline text-primary">Contact Us</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField control={form.control} name="name" render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl><Input placeholder="Your Name" {...field} /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )} />
+                    <FormField control={form.control} name="email" render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl><Input placeholder="your.email@example.com" {...field} /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )} />
+                    <FormField control={form.control} name="message" render={({ field }) => (
+                        <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl><Textarea placeholder="Your message..." {...field} className="min-h-[120px]" /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )} />
+                    <CardFooter className="flex flex-col items-center p-0">
+                        <Button type="submit" disabled={form.formState.isSubmitting} className="w-full">
+                        {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
+                        </Button>
+                    </CardFooter>
+                    </form>
+                </Form>
+            </CardContent>
+      </Card>
     </div>
   );
 }
