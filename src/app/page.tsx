@@ -1,8 +1,7 @@
-import { AppStoreBadge } from "@/components/icons/app-store-badge";
-import { GooglePlayBadge } from "@/components/icons/google-play-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gem, LineChart, Link2 } from "lucide-react";
+import { Gem, LineChart, Link2, Smartphone } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -34,12 +33,12 @@ export default function Home() {
             LandHacker.ai is the all-in-one proptech platform for real estate investors, agents, and wholesalers. Get access to comprehensive property data, generate instant comps, and connect with motivated sellers—all in one place.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link href="#" aria-label="Download on the App Store">
-              <AppStoreBadge className="h-12 md:h-14" />
-            </Link>
-            <Link href="#" aria-label="Get it on Google Play">
-              <GooglePlayBadge className="h-12 md:h-14" />
-            </Link>
+            <Button asChild size="lg">
+              <Link href="#">
+                <Smartphone className="mr-2 h-5 w-5" />
+                Download The App
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
