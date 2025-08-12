@@ -5,6 +5,9 @@ import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { Suspense } from 'react';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { NavigationEvents } from '@/components/NavigationEvents';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -37,10 +40,14 @@ export default function RootLayout({
            inter.variable
         )}
       >
+        <GoogleAnalytics />
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
+        <Suspense fallback={null}>
+          <NavigationEvents />
+        </Suspense>
       </body>
     </html>
   );
