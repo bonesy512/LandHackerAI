@@ -96,7 +96,7 @@ Attn: Privacy Officer
 621 Saddle Forrest
 Cibolo, TX, 78108
 Email: privacy@landhacker.ai
-Phone: [Insert Corporate Phone Number]
+Phone: 210-288-4266
 `;
 
   return (

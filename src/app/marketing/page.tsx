@@ -61,7 +61,8 @@ Land AI LLC
 Attn: Marketing Department
 621 Saddle Forrest
 Cibolo, TX, 78108
-Email: [Insert Marketing Email Address, e.g., marketing@landhacker.ai]
+Email: marketing@landhacker.ai
+Phone: 210-288-4266
 `;
 
   return (
