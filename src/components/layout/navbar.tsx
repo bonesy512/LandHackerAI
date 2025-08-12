@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact Us" },
+  { href: "/marketing", label: "Marketing" },
 ];
 
 export function Navbar() {
