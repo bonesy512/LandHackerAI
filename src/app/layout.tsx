@@ -8,6 +8,9 @@ import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { NavigationEvents } from '@/components/NavigationEvents';
+import { Analytics } from '@vercel/analytics/react';
+// --- 1. IMPORT VERCEL SPEED INSIGHTS ---
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -41,13 +44,18 @@ export default function RootLayout({
         )}
       >
         <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <NavigationEvents />
+        </Suspense>
+        
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
-        <Suspense fallback={null}>
-          <NavigationEvents />
-        </Suspense>
+        
+        <Analytics />
+        {/* --- 2. ADD THE VERCEL SPEED INSIGHTS COMPONENT --- */}
+        <SpeedInsights />
       </body>
     </html>
   );
