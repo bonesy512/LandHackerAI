@@ -1,6 +1,29 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { type Metadata } from 'next';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
+import { ScrollArea } from '@/components/ui/scroll-area';
 
+// SEO and Open Graph Metadata
+export const metadata: Metadata = {
+  title: "Privacy Policy | LandHacker.ai",
+  description: "Learn how LandHacker.ai collects, uses, and protects your personal data. Our privacy policy details our commitment to your data security and user rights.",
+  openGraph: {
+    title: "Privacy Policy | LandHacker.ai",
+    description: "Learn how LandHacker.ai collects, uses, and protects your personal data.",
+    url: "https://landhacker.ai/privacy",
+    siteName: "LandHacker.ai",
+    images: [
+      {
+        url: "/og-image-legal.png", // A generic branded OG image
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "article",
+  },
+};
+
+// Page Component
 export default function PrivacyPolicyPage() {
   const privacyPolicyText = `
 LandHacker App Privacy Policy
@@ -72,23 +95,25 @@ Land AI LLC
 Attn: Privacy Officer
 621 Saddle Forrest
 Cibolo, TX, 78108
-Email: [Insert Corporate Email Address, e.g., privacy@landhacker.ai]
+Email: privacy@landhacker.ai
 Phone: [Insert Corporate Phone Number]
 `;
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto max-w-4xl py-12 px-4">
       <Card className="bg-card border-primary/20">
         <CardHeader>
-          <CardTitle className="text-4xl font-headline text-primary">Privacy Policy</CardTitle>
-          <CardDescription className="text-muted-foreground">Last updated: August 7, 2025</CardDescription>
+          <CardTitle className="text-3xl font-bold text-primary font-headline">
+            Privacy Policy
+          </CardTitle>
+          <CardDescription className="text-muted-foreground">Last Updated: August 12, 2025</CardDescription>
         </CardHeader>
         <CardContent>
-            <ScrollArea className="h-[60vh] rounded-md border border-primary/20 p-4">
-                 <div className="whitespace-pre-wrap text-sm text-muted-foreground">
-                    {privacyPolicyText}
-                 </div>
-            </ScrollArea>
+          <ScrollArea className="h-[60vh] rounded-md border border-primary/20 p-4">
+              <div className="whitespace-pre-wrap text-sm text-muted-foreground prose dark:prose-invert max-w-none">
+                {privacyPolicyText}
+              </div>
+          </ScrollArea>
         </CardContent>
       </Card>
     </div>
