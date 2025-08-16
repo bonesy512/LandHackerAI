@@ -3,11 +3,8 @@
 import { NextResponse } from 'next/server';
 import { contactFormSchema } from '@/lib/schemas';
 import { Resend } from 'resend';
-
-// Import the email template you approved
 import { ContactFormReceiptEmail } from '../../../../emails/contact-form-receipt';
 
-// Instantiate Resend using the API key from Vercel's environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
@@ -20,26 +17,36 @@ export async function POST(request: Request) {
   
   const { name, email, message } = validation.data;
 
-  try {
-    // Send one email to yourself (the notification)
-    await resend.emails.send({
-      from: 'Contact Form <noreply@landhacker.ai>', // Must be a verified domain in Resend
-      to: process.env.RECIPIENT_EMAIL!, // Your personal email from env variables
-      subject: `New Contact Form Submission from ${name}`,
-      html: `<h2>New Message from LandHacker.ai</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message}</p>`,
-    });
+  // --- Start of updated logic ---
 
-    // Send a second email to the user (the receipt)
-    await resend.emails.send({
-      from: 'LandHacker.ai <noreply@landhacker.ai>', // Must be a verified domain in Resend
-      to: email, // The user's email address
-      subject: 'Message Received | LandHacker.ai',
-      react: ContactFormReceiptEmail({ name: name }), // Pass the user's name as a prop
-    });
+  // 1. Send the notification email to yourself
+  const sendToAdmin = await resend.emails.send({
+    from: 'Contact Form <noreply@landhacker.ai>',
+    to: process.env.RECIPIENT_EMAIL!,
+    subject: `New Contact Form Submission from ${name}`,
+    html: `<h2>New Message from LandHacker.ai</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message}</p>`,
+  });
 
-    return NextResponse.json({ message: "Emails sent successfully!" });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Failed to send emails." }, { status: 500 });
+  // Check if the first email failed
+  if (sendToAdmin.error) {
+    console.error('Failed to send admin notification email:', sendToAdmin.error);
+    return NextResponse.json({ message: "Failed to send notification email.", error: sendToAdmin.error }, { status: 500 });
   }
+
+  // 2. Send the confirmation email to the user
+  const sendToUser = await resend.emails.send({
+    from: 'LandHacker.ai <noreply@landhacker.ai>',
+    to: email,
+    subject: 'Message Received | LandHacker.ai',
+    react: ContactFormReceiptEmail({ name: name }),
+  });
+
+  // Check if the second email failed
+  if (sendToUser.error) {
+    console.error('Failed to send user confirmation email:', sendToUser.error);
+    return NextResponse.json({ message: "Failed to send confirmation email.", error: sendToUser.error }, { status: 500 });
+  }
+
+  // 3. If both emails were sent successfully, return a success response
+  return NextResponse.json({ message: "Emails sent successfully!" }, { status: 200 });
 }
